@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
     var window: UIWindow?
-
+    var expenseArray: [Expense] = []
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FIRApp.configure()
+        
+     //   FIRAuth.auth()?.createUserWithEmail("mjammer18@gmail.com", password: "miriam") { (user, error) in
+            
+       // }
         return true
     }
 
@@ -42,5 +49,121 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+
 }
 
+func randomInteger(minimumValue: Int, maximumValue: Int) -> Int
+{
+    return minimumValue + Int(arc4random_uniform(UInt32(maximumValue - minimumValue + 1)))
+}
+
+func colorWithHexString (hex:String) -> UIColor
+{
+    var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).noWhiteSpaceLowerCaseString
+    
+    if (cString.hasPrefix("#"))
+    {
+        cString = (cString as NSString).substringFromIndex(1)
+    }
+    
+    if (cString.characters.count != 6)
+    {
+        return UIColor.grayColor()
+    }
+    
+    let rString = (cString as NSString).substringToIndex(2)
+    let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+    let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+    
+    var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0
+    NSScanner(string: rString).scanHexInt(&r)
+    NSScanner(string: gString).scanHexInt(&g)
+    NSScanner(string: bString).scanHexInt(&b)
+    
+    return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+}
+
+extension Array
+{
+    var shuffledValue: [Element]
+    {
+        var arrayElements = self
+        
+        for individualIndex in 0..<arrayElements.count
+        {
+            swap(&arrayElements[individualIndex], &arrayElements[Int(arc4random_uniform(UInt32(arrayElements.count-individualIndex)))+individualIndex])
+        }
+        
+        return arrayElements
+    }
+    
+    var chooseOne: Element
+    {
+        return self[Int(arc4random_uniform(UInt32(count)))]
+    }
+}
+
+extension Int
+{
+    var arrayValue: [Int]
+    {
+        return description.characters.map{Int(String($0)) ?? 0}
+    }
+    
+    var ordinalValue: String
+        {
+        get
+        {
+            var suffix = "th"
+            switch self % 10
+            {
+            case 1:
+                suffix = "st"
+            case 2:
+                suffix = "nd"
+            case 3:
+                suffix = "rd"
+            default: ()
+            }
+            
+            if 10 < (self % 100) && (self % 100) < 20
+            {
+                suffix = "th"
+            }
+            
+            return String(self) + suffix
+        }
+    }
+}
+
+extension String
+{
+    var noWhiteSpaceLowerCaseString: String { return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).lowercaseString }
+    
+    var letterValue: Int
+    {
+        return Array("abcdefghijklmnopqrstuvwxyz".characters).indexOf(Character(lowercaseString))?.successor() ?? 0
+    }
+    
+    var jumbledValue: String
+    {
+        return String(Array(arrayLiteral: self).shuffledValue)
+    }
+    
+    var length: Int { return characters.count }
+    
+    func removeWhitespace() -> String
+    {
+        return self.stringByReplacingOccurrencesOfString(" ", withString: "")
+    }
+    
+    func chopPrefix(countToChop: Int = 1) -> String
+    {
+        return self.substringFromIndex(self.startIndex.advancedBy(characters.count - countToChop))
+    }
+    
+    func chopSuffix(countToChop: Int = 1) -> String
+    {
+        return self.substringToIndex(self.startIndex.advancedBy(characters.count - countToChop))
+    }
+}
