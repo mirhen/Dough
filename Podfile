@@ -7,7 +7,8 @@ target 'Dough' do
 pod 'Charts'
 pod 'Firebase'
 pod 'Firebase/Auth'
-pod 'Realm'
+pod 'RealmSwift'
+
   # Pods for Dough
 
   target 'DoughTests' do

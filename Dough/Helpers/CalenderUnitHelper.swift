@@ -127,4 +127,13 @@ class CalendarUnitHelper {
             return "failure"
         }
     }
+    
+    static func convertNSDataToUIImage(imageData: NSData) -> UIImage
+    {
+        return UIImage(data: imageData)!
+    }
+    
+    static func convertUIImageToNSData(image: UIImage) -> NSData {
+        return UIImagePNGRepresentation(image)!
+    }
 }

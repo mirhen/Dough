@@ -8,21 +8,41 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
     var window: UIWindow?
-    var expenseArray: [Expense] = []
+    var expenseArray = Results<Expense>!() // [Expense] = []
+    var goalArray = Results<Goal>!() // [Goal] = []
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         FIRApp.configure()
         
+        NSUserDefaults.standardUserDefaults().setInteger(25, forKey: "Age")
+        print(NSUserDefaults.standardUserDefaults().integerForKey("Age"))
+        
+        if isAppAlreadyLaunchedOnce() == false {
+//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//            appDelegate.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let yourVC = mainStoryboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
+//            appDelegate.window?.rootViewController = yourVC
+//            appDelegate.window?.makeKeyAndVisible()
+        } else {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let yourVC = mainStoryboard.instantiateViewControllerWithIdentifier("TabBarViewController") as! TabBarViewController
+            appDelegate.window?.rootViewController = yourVC
+            appDelegate.window?.makeKeyAndVisible()
+        }
+
      //   FIRAuth.auth()?.createUserWithEmail("mjammer18@gmail.com", password: "miriam") { (user, error) in
-            
-       // }
+
         return true
     }
 
@@ -50,6 +70,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
 
 
+}
+
+func isAppAlreadyLaunchedOnce() -> Bool{
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    if defaults.stringForKey("isAppAlreadyLaunchedOnce") != nil{
+        print("App already launched")
+        return true
+    }else{
+        defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
+        print("App launched first time")
+        return false
+    }
 }
 
 func randomInteger(minimumValue: Int, maximumValue: Int) -> Int

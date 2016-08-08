@@ -61,7 +61,7 @@ class addAGoalViewController: UIViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("goalIdentifier", forIndexPath: indexPath) as! GoalTableViewCell
         
         cell.titleLabel.text = goals[indexPath.row]
-        cell.descriptionLabel.text = goalDescriptions[indexPath.row]
+//        cell.descriptionLabel.text = goalDescriptions[indexPath.row]
         cell.imageView?.image = goalIcons[indexPath.row]
         cell.backgroundColor =  UIColor(patternImage: UIImage(named: "cheating xcode patern.png")!)
         

@@ -7,38 +7,46 @@
 //
 
 import UIKit
+import RealmSwift
 
-class Expense: NSObject
+class Expense: Object// , NSCoding
 {
-    var amountOfMoney: Double!
-    var expenseName: String!
-    var itemTag: Int!
-    var timeUnit: Int!
-    var expenseImage: UIImage!
+     dynamic var amountOfMoney: Double = 0
+     dynamic var expenseName: String = "title"
+     dynamic var itemTag: Int = 0
+     dynamic var timeUnit: Int = 1
+    dynamic var expenseImage: NSData = UIImagePNGRepresentation(UIImage(named: "img.png")!)!
     
-    init(amountOfMoney: Double, expenseName: String, itemTag: Int, timeUnit: Int, expenseImage: UIImage)
-    {
-        self.amountOfMoney = amountOfMoney
-        self.expenseName = expenseName
-        self.itemTag = itemTag
-        self.timeUnit = timeUnit
-        self.expenseImage = expenseImage
-    }
     
-//    required convenience init(coder aDecoder: NSCoder) {
-//        let amountOfMoney = aDecoder.decodeDoubleForKey("amountOfMoney")
-//        let expenseName = aDecoder.decodeObjectForKey("expenseName") as! String
-//        let itemTag = aDecoder.decodeIntegerForKey("itemTag")
-//        let timeUnit = aDecoder.decodeIntegerForKey("timeUnit")
-//        let expenseImage = aDecoder.decodeObjectForKey("expenseImage") as! UIImage
+//    init(amountOfMoney: Double, expenseName: String, itemTag: Int, timeUnit: Int)//, expenseImage: UIImage)
+//    {
+//        self.amountOfMoney = amountOfMoney
+//        self.expenseName = expenseName
+//        self.itemTag = itemTag
+//        self.timeUnit = timeUnit
+   //     self.expenseImage = expenseImage
+//    }
+    
+//    required convenience init?(coder aDecoder: NSCoder) {
+//        
+//        guard
+//        
+//        let amountOfMoney = aDecoder.decodeObjectForKey("amountOfMoney") as? Double,
+//        let expenseName = aDecoder.decodeObjectForKey("expenseName") as? String,
+//        let itemTag = aDecoder.decodeObjectForKey("itemTag") as? Int,
+//        let timeUnit = aDecoder.decodeObjectForKey("timeUnit") as? Int,
+//        let expenseImage = aDecoder.decodeObjectForKey("expenseImage") as? UIImage
+//        else {
+//            return nil
+//        }
 //        self.init(amountOfMoney: amountOfMoney, expenseName: expenseName, itemTag: itemTag, timeUnit: timeUnit, expenseImage: expenseImage)
 //    }
 //    
 //    func encodeWithCoder(aCoder: NSCoder) {
-//        aCoder.encodeDouble(amountOfMoney, forKey: "amoutOfMoney")
+//        aCoder.encodeObject(amountOfMoney, forKey: "amountOfMoney")
 //        aCoder.encodeObject(expenseName, forKey: "expenseName")
-//        aCoder.encodeInteger(itemTag, forKey: "itemTag")
-//        aCoder.encodeInteger(timeUnit, forKey: "timeUnit")
+//        aCoder.encodeObject(itemTag, forKey: "itemTag")
+//        aCoder.encodeObject(timeUnit, forKey: "timeUnit")
 //        aCoder.encodeObject(expenseImage, forKey: "expenseImage")
 //    }
 }

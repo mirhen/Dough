@@ -9,12 +9,14 @@
 import UIKit
 import Charts
 import GameKit
+import RealmSwift
 
 class HomeViewController: UIViewController, ChartViewDelegate
 {
     
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var spendingBalanceLabel: UITextField!
+    @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var spendingBalanceDatePicker: UIPickerView!
     
     var unique: [String] = []
@@ -29,20 +31,19 @@ class HomeViewController: UIViewController, ChartViewDelegate
             print("totalTimeUnit - \(totalTimeUnit)")
         }
     }
-    var expenses = [Expense]()
+    var expenses = Results<Expense>!() //[Expense]()
         {
         didSet
         {
             if expenses.count != 0
             {
                 expenseDictionary.removeAll()
-                
                 for individualObject in expenses
                 {
-                    let money = CalendarUnitHelper.convertToBalancePerWeek(individualObject.timeUnit!, amountOfMoney: individualObject.amountOfMoney!)
+                    let money = CalendarUnitHelper.convertToBalancePerWeek(individualObject.timeUnit, amountOfMoney: individualObject.amountOfMoney)
                     
-                    expenseDictionary[individualObject.expenseName!] = money
-                    print(expenseDictionary[individualObject.expenseName!])
+                    expenseDictionary[individualObject.expenseName] = money
+                    print(expenseDictionary[individualObject.expenseName])
                 }
                 if expenseDictionary.count != 0
                 {
@@ -71,6 +72,15 @@ class HomeViewController: UIViewController, ChartViewDelegate
         pieChartView.holeRadiusPercent = 0.2
         pieChartView.transparentCircleRadiusPercent =  pieChartView.holeRadiusPercent// + 0.05
         //      pieChartView.usePercentValuesEnabled = true
+        let name = NSUserDefaults.standardUserDefaults().stringForKey("name")
+        if name != nil
+        {
+            welcomeLabel.text = "Hello \(name!.capitalizedString)"
+        }
+        else
+        {
+            welcomeLabel.text = "Hello"
+        }
         
         let empty = ["your expenses"]
         let value = [0.0]
@@ -91,7 +101,7 @@ class HomeViewController: UIViewController, ChartViewDelegate
         var t = 0.0
         spendingBalanceDatePicker.subviews[1].hidden = true
         spendingBalanceDatePicker.subviews[2].hidden = true
-        
+        spendingBalanceDatePicker.selectRow(1, inComponent: 0, animated: true)
         if expenseDictionary.count != 0
         {
             if totalTimeUnit != 4
@@ -101,7 +111,7 @@ class HomeViewController: UIViewController, ChartViewDelegate
                     t += number
                 }
                 spendingMoney = totalMoney - t
-                
+                NSUserDefaults.standardUserDefaults().setDouble(spendingMoney, forKey: "spendingMoney")
                 setChart(Array(expenseDictionary.keys), values: Array(expenseDictionary.values))
             }
         }

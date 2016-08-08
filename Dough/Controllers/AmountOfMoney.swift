@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AmountOfMoney: UIViewController
 {
@@ -110,8 +111,8 @@ class AmountOfMoney: UIViewController
         
         self.view.sendSubviewToBack(moneyImageView)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func keyboardWillShow(notification: NSNotification)
@@ -216,8 +217,19 @@ class AmountOfMoney: UIViewController
                 timeUnit = 3
             }
             
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setDouble(testBalance, forKey: "totalBalance")
+            defaults.setInteger(timeUnit, forKey: "timeUnit")
+            
+            testBalance = defaults.doubleForKey("totalBalance")
+            timeUnit = defaults.integerForKey("timeUnit")
             (self.presentingViewController?.childViewControllers[0] as! ETVC).totalBalance = testBalance
             (self.presentingViewController?.childViewControllers[0] as! ETVC).totalTimeUnit = timeUnit
+            
+            
+            
+//            print(NSUserDefaults.standardUserDefaults().integerForKey("Age"))
+            
             
             (self.presentingViewController?.childViewControllers[1] as! HomeViewController).totalMoney = testBalance
             (self.presentingViewController?.childViewControllers[1] as! HomeViewController).totalTimeUnit = timeUnit

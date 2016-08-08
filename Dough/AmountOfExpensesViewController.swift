@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AOEC: UIViewController
 {
@@ -33,8 +34,9 @@ class AOEC: UIViewController
     
     //Other Objects
     var balanceDictionary: [Int : Double] = [:]
-    var currentExpense: Expense!
+    var currentExpense: Expense?
     var newImage: UIImage?
+    
     //Action Objects
     @IBAction func dayButtonPressed(sender: AnyObject)
     {
@@ -173,13 +175,13 @@ class AOEC: UIViewController
         //If currentExpense does indeed exist, format various items.
         if let verifiedCurrentExpense = currentExpense
         {
-            newImage = verifiedCurrentExpense.expenseImage
+           // newImage = verifiedCurrentExpense.expenseImage
             
             //Format the text of *nameOfExpenseTextField* and *balanceTextField*.
             nameOfExpenseTextField.text = verifiedCurrentExpense.expenseName
             nameOfExpenseTextField.textColor = UIColor.whiteColor()
-            balanceTextField.text = "$\(verifiedCurrentExpense.amountOfMoney!)"
-            expenseImageView.image = verifiedCurrentExpense.expenseImage
+            balanceTextField.text = "$\(verifiedCurrentExpense.amountOfMoney)"
+           expenseImageView.image = CalendarUnitHelper.convertNSDataToUIImage(verifiedCurrentExpense.expenseImage)
             
             //For each type of date chosen, select the appropriate row in the date type picker view.
             if verifiedCurrentExpense.timeUnit == 0
@@ -223,6 +225,7 @@ class AOEC: UIViewController
             monthView.hidden = true
             weekView.hidden = true
             yearView.hidden = true
+            
         }
         
         //As the balance text field edits, remove disallowed characters.
@@ -293,16 +296,39 @@ class AOEC: UIViewController
     @IBAction func saveButton(sender: AnyObject)
     {
         self.view.endEditing(true)
+        let presentingViewController = (self.presentingViewController?.childViewControllers[0] as! ETVC)
         
+
         if balanceTextField.text != "$"
         {
             if currentExpense != nil
             {
-                let presentingViewController = (self.presentingViewController?.childViewControllers[0] as! ETVC)
+                var timeUnit = 4
                 
-                presentingViewController.expenseArray[presentingViewController.expenseArray.indexOf(currentExpense)!].amountOfMoney = Double(balanceTextField.text!.stringByReplacingOccurrencesOfString("$", withString: ""))!
+                if dayView.hidden == false
+                {
+                    timeUnit = 0
+                }
+                else if weekView.hidden == false
+                {
+                    timeUnit = 1
+                }
+                else if monthView.hidden == false
+                {
+                    timeUnit = 2
+                }
+                else
+                {
+                    timeUnit = 3
+                }
+
+                let newExpense = Expense()
+                newExpense.amountOfMoney = Double(balanceTextField.text!.stringByReplacingOccurrencesOfString("$", withString: ""))!
+                newExpense.expenseName = nameOfExpenseTextField.text!
+                newExpense.timeUnit = timeUnit
+                newExpense.expenseImage = CalendarUnitHelper.convertUIImageToNSData(expenseImageView.image!)
+                RealmHelper.updateExpense(currentExpense!, newExpense: newExpense)
                 presentingViewController.amountTableView.reloadData()
-                presentingViewController.expenseArray[presentingViewController.expenseArray.indexOf(currentExpense)!].expenseImage = expenseImageView.image
             }
             else
             {
@@ -324,11 +350,16 @@ class AOEC: UIViewController
                 {
                     timeUnit = 3
                 }
-                (self.presentingViewController?.childViewControllers[0] as! ETVC).expenseArray.append(Expense(amountOfMoney: Double(balanceTextField.text!.stringByReplacingOccurrencesOfString("$", withString: ""))!, expenseName: nameOfExpenseTextField.text!, itemTag: randomInteger(1, maximumValue: 9999), timeUnit: timeUnit, expenseImage: expenseImageView.image!))
+                let newExpense = Expense()
+                newExpense.amountOfMoney = balanceDictionary[0]!
+                newExpense.itemTag = randomInteger(1, maximumValue: 9999)
+                newExpense.timeUnit = timeUnit
+                newExpense.expenseImage = CalendarUnitHelper.convertUIImageToNSData(expenseImageView.image!)
+                RealmHelper.addExpense(newExpense)
             }
-            
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+        presentingViewController.expenseArray = RealmHelper.retrieveExpense()
     }
     
     //--------------------------------------------------//
@@ -438,7 +469,7 @@ extension AOEC: UIImagePickerControllerDelegate, UINavigationControllerDelegate
     {
         if let verifiedCurrentExpense = currentExpense
         {
-            verifiedCurrentExpense.expenseImage = image
+            verifiedCurrentExpense.expenseImage = CalendarUnitHelper.convertUIImageToNSData(image)
         }
         else
         {

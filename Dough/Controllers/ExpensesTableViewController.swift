@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
@@ -26,15 +27,16 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var totalBalance = 0.0
     var totalTimeUnit: Int = 0
     var defaultExpenseImages = [UIImage(named: "groceries image.jpg"), UIImage(named: "rent image.jpg"), UIImage(named: "health insurance.jpg"), UIImage(named: "gym image.jpg"), UIImage(named: "phone image.jpg") ]
-    var editedExpenseImages: [UIImage] = []
     var savedExpenseArray: [Expense] = []
     var savedArray = "SavedArray"
-    var expenseArray: [Expense] = []
+    let realm = try! Realm()
+    var expenseArray = Results<Expense>?()
         {
         didSet
         {
             let viewController = self.tabBarController?.viewControllers![1] as! HomeViewController
             viewController.expenses = expenseArray
+            
             amountTableView.reloadData()
         }
     }
@@ -48,7 +50,11 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         super.viewDidLoad()
         
-        
+        if NSUserDefaults.standardUserDefaults().doubleForKey("totalBalance") != 0
+        {
+            totalBalance = NSUserDefaults.standardUserDefaults().doubleForKey("totalBalance")
+            totalTimeUnit = NSUserDefaults.standardUserDefaults().integerForKey("timeUnit")
+        }
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
@@ -56,37 +62,54 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         amountTableView.dataSource = self
         amountOfMoneyButton.setTitle("$", forState: .Normal)
         
-        let firstExpense = Expense(amountOfMoney: 20, expenseName: "groceries", itemTag: randomInteger(1, maximumValue: 9999), timeUnit: 1, expenseImage: UIImage(named: "groceries image.jpg")!)
+        let firstExpense = Expense()
+        firstExpense.amountOfMoney = 10
+        firstExpense.expenseName = "groceries"
+        firstExpense.itemTag = randomInteger(1, maximumValue: 9999)
+        firstExpense.timeUnit = 1
+        firstExpense.expenseImage = UIImagePNGRepresentation(UIImage(named: "groceries image.jpg")!)!
         
-        let secondExpense = Expense(amountOfMoney: 20, expenseName: "rent", itemTag: randomInteger(1, maximumValue: 9999), timeUnit: 1, expenseImage: UIImage(named: "rent image.jpg")!)
+        let secondExpense = Expense()
+        secondExpense.amountOfMoney = 10
+        secondExpense.expenseName = "rent"
+        secondExpense.itemTag = randomInteger(1, maximumValue: 9999)
+        secondExpense.timeUnit = 1
+        secondExpense.expenseImage = UIImagePNGRepresentation(UIImage(named: "rent image.jpg")!)!
         
-        let thirdExpense = Expense(amountOfMoney: 20, expenseName: "health insurance", itemTag: randomInteger(1, maximumValue: 9999), timeUnit: 1, expenseImage: UIImage(named: "health insurance.jpg")!)
+        let thirdExpense = Expense()
+        thirdExpense.amountOfMoney = 10
+        thirdExpense.expenseName = "health insurance"
+        thirdExpense.itemTag = randomInteger(1, maximumValue: 9999)
+        thirdExpense.timeUnit = 1
+        thirdExpense.expenseImage = UIImagePNGRepresentation(UIImage(named: "health insurance.jpg")!)!
         
-        let fourthExpense = Expense(amountOfMoney: 20, expenseName: "gym", itemTag: randomInteger(1, maximumValue: 9999), timeUnit: 1, expenseImage: UIImage(named: "gym image.jpg")!)
+        let fourthExpense = Expense()
+        fourthExpense.amountOfMoney = 10
+        fourthExpense.expenseName = "gym"
+        fourthExpense.itemTag = randomInteger(1, maximumValue: 9999)
+        fourthExpense.timeUnit = 1
+        fourthExpense.expenseImage = UIImagePNGRepresentation(UIImage(named: "gym image.jpg")!)!
         
-        let fifthExpense = Expense(amountOfMoney: 20, expenseName: "phone", itemTag: randomInteger(1, maximumValue: 9999), timeUnit: 1, expenseImage: UIImage(named: "phone image.jpg")!)
+        let fifthExpense = Expense()
+        fifthExpense.amountOfMoney = 10
+        fifthExpense.expenseName = "phone"
+        fourthExpense.itemTag = randomInteger(1, maximumValue: 9999)
+        fifthExpense.timeUnit = 1
+        fifthExpense.expenseImage = UIImagePNGRepresentation(UIImage(named: "phone image.jpg")!)!
         
-        expenseArray.append(firstExpense)
-        expenseArray.append(secondExpense)
-        expenseArray.append(thirdExpense)
-        expenseArray.append(fourthExpense)
-        expenseArray.append(fifthExpense)
-        //        let defaults = NSUserDefaults.standardUserDefaults()
-        //
-        //        //To reset array
-        //        defaults.setObject(nil, forKey: savedArray)
-        //
-        //        if let decoded = defaults.objectForKey(savedArray) as? NSData {
-        //            expenseArray.removeAll()
-        //
-        //            let decodedExpenseArray = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as! [Expense]
-        //            print("decodedExpenseArray: \(decodedExpenseArray)")
-        //            for individualObject in decodedExpenseArray {
-        //                expenseArray.append(individualObject)
-        //                print("individualObject in expense array: \(individualObject)")
-        //            }
-        //
-        //        }
+        expenseArray = RealmHelper.retrieveExpense()
+        
+        print("expenseArray- \(expenseArray)")
+        
+        if RealmHelper.retrieveExpense().count == 0
+        {
+            RealmHelper.addExpense(firstExpense)
+            RealmHelper.addExpense(secondExpense)
+            RealmHelper.addExpense(thirdExpense)
+            RealmHelper.addExpense(fourthExpense)
+            RealmHelper.addExpense(fifthExpense)
+        }
+        expenseArray = RealmHelper.retrieveExpense()
         
         (UIApplication.sharedApplication().delegate as! AppDelegate).expenseArray = expenseArray
     }
@@ -115,17 +138,9 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillDisappear(animated: Bool)
     {
         super.viewWillDisappear(animated)
-        //        let defaults = NSUserDefaults.standardUserDefaults()
-        //        if expenseArray != [] {
-        //            let data = NSKeyedArchiver.archivedDataWithRootObject(expenseArray)
-        //            print("data: \(data)")
-        //            defaults.setObject(data, forKey: savedArray)
-        //            defaults.synchronize()
-        //            savedExpenseArray = expenseArray
-        //        }
         
         let viewController = self.tabBarController?.viewControllers![1] as! HomeViewController
-        viewController.expenses.removeAll()
+        
         viewController.expenses = expenseArray
     }
     
@@ -141,19 +156,23 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return expenseArray.count
+        return expenseArray!.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return self.view.frame.height/3.5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! MoneyTableViewCell
         
-        print("tableView: cellForRowAtIndexPath array: \(expenseArray.count)")
+        print("tableView: cellForRowAtIndexPath array: \(expenseArray!.count)")
         
-        cell.titleLabel.text = expenseArray[indexPath.row].expenseName ?? "title"
-        cell.backgroundColor = colorWithHexString("#F89D21")
-        var money = CalendarUnitHelper.convertToFormattedDouble(expenseArray[indexPath.row].amountOfMoney!)
-        money = CalendarUnitHelper.convertToBalancePerWeek(expenseArray[indexPath.row].timeUnit!, amountOfMoney: money)
+        cell.titleLabel.text = expenseArray![indexPath.row].expenseName ?? "title"
+        var money = CalendarUnitHelper.convertToFormattedDouble(expenseArray![indexPath.row].amountOfMoney)
+        money = CalendarUnitHelper.convertToBalancePerWeek(expenseArray![indexPath.row].timeUnit, amountOfMoney: money)
         
         let currencyFormatter = NSNumberFormatter()
         currencyFormatter.numberStyle = .CurrencyStyle
@@ -161,9 +180,18 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         cell.moneyAmountLabel.text = "\(currencyFormatter.stringFromNumber(money)!) / Week"
         
-        cell.expenseImageView.image = expenseArray[indexPath.row].expenseImage
+        cell.expenseImageView.image = CalendarUnitHelper.convertNSDataToUIImage(expenseArray![indexPath.row].expenseImage)
         
         return cell
+    }
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == .Delete
+        {
+            RealmHelper.deleteExpense(expenseArray![indexPath.row])
+            expenseArray = RealmHelper.retrieveExpense()
+            tableView.reloadData()
+        }
     }
     
     @IBAction func unwindToListNotesViewController(segue: UIStoryboardSegue)
@@ -177,7 +205,7 @@ class ETVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             let destinationController = segue.destinationViewController as! AOEC
             let indexPath = amountTableView.indexPathForSelectedRow
             
-            destinationController.currentExpense = expenseArray[indexPath!.row]
+            destinationController.currentExpense = expenseArray![indexPath!.row]
             
             print("editExpensesPush")
         }

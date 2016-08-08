@@ -11,8 +11,7 @@ import UIKit
 class GoalTableViewCell: UITableViewCell {
 
     @IBOutlet weak var goalImageView: UIImageView!
-  
-    @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var amoountLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

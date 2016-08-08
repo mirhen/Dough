@@ -31,12 +31,14 @@ PODS:
   - Realm (1.0.1):
     - Realm/Headers (= 1.0.1)
   - Realm/Headers (1.0.1)
+  - RealmSwift (1.0.1):
+    - Realm (= 1.0.1)
 
 DEPENDENCIES:
   - Charts
   - Firebase
   - Firebase/Auth
-  - Realm
+  - RealmSwift
 
 SPEC CHECKSUMS:
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
@@ -49,7 +51,8 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
+  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
 
-PODFILE CHECKSUM: b03df92412f239e31d79e7fad9939f27d2ffde0c
+PODFILE CHECKSUM: 2c2c1e2359b0dacd6c9770409ba190311dc1019e
 
 COCOAPODS: 1.0.1

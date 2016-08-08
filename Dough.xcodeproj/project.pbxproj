@@ -23,6 +23,15 @@
 		E62E20421D52622A00B6DA2A /* ChooseAGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62E20411D52622A00B6DA2A /* ChooseAGoalViewController.swift */; };
 		E62E20441D5264DB00B6DA2A /* photo icon for goals.png in Resources */ = {isa = PBXBuildFile; fileRef = E62E20431D5264DB00B6DA2A /* photo icon for goals.png */; };
 		E62E20461D52929D00B6DA2A /* money background image.png in Resources */ = {isa = PBXBuildFile; fileRef = E62E20451D52929D00B6DA2A /* money background image.png */; };
+		E62E20481D53FB8100B6DA2A /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62E20471D53FB8100B6DA2A /* RealmHelper.swift */; };
+		E64B932D1D54646B00157C58 /* CreateAGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B932C1D54646B00157C58 /* CreateAGoalViewController.swift */; };
+		E64B932F1D54673D00157C58 /* my goals backgorund.png in Resources */ = {isa = PBXBuildFile; fileRef = E64B932E1D54673D00157C58 /* my goals backgorund.png */; };
+		E64B93331D54694200157C58 /* saving background image goal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64B93321D54694200157C58 /* saving background image goal.jpg */; };
+		E64B93351D546B2F00157C58 /* YourGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B93341D546B2F00157C58 /* YourGoalsViewController.swift */; };
+		E64B93371D54700200157C58 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B93361D54700200157C58 /* Goal.swift */; };
+		E64B93391D5575FC00157C58 /* potential wlecome page background.png in Resources */ = {isa = PBXBuildFile; fileRef = E64B93381D5575FC00157C58 /* potential wlecome page background.png */; };
+		E64B933B1D5578C500157C58 /* WelcomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B933A1D5578C500157C58 /* WelcomePageViewController.swift */; };
+		E64B933D1D56692100157C58 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B933C1D56692100157C58 /* TabBarViewController.swift */; };
 		E67D81001D4AAA7400BDE13A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E67D80FF1D4AAA7400BDE13A /* GoogleService-Info.plist */; };
 		E6873D541D46C2B900EC9DF4 /* ExpensesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6873D531D46C2B800EC9DF4 /* ExpensesTableViewController.swift */; };
 		E68D671D1D4DDF67006EFD28 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68D671C1D4DDF67006EFD28 /* Shape.swift */; };
@@ -49,7 +58,6 @@
 		E6D009591D4BC2D1007B38F1 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D009561D4BC2D1007B38F1 /* email.png */; };
 		E6D0095A1D4BC2D1007B38F1 /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D009571D4BC2D1007B38F1 /* password.png */; };
 		E6D0095B1D4BC2D1007B38F1 /* username icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D009581D4BC2D1007B38F1 /* username icon.png */; };
-		E6DF67811D3FF7C700382663 /* ExpensesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF677F1D3FF7C700382663 /* ExpensesTableViewCell.swift */; };
 		E6DF67821D3FF7C700382663 /* MoneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF67801D3FF7C700382663 /* MoneyTableViewCell.swift */; };
 		E6DF67841D3FF7D300382663 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF67831D3FF7D300382663 /* Expense.swift */; };
 		E6E7A73B1D41E31A00B575EA /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E7A73A1D41E31A00B575EA /* Charts.framework */; };
@@ -101,6 +109,15 @@
 		E62E20411D52622A00B6DA2A /* ChooseAGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAGoalViewController.swift; sourceTree = "<group>"; };
 		E62E20431D5264DB00B6DA2A /* photo icon for goals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo icon for goals.png"; sourceTree = "<group>"; };
 		E62E20451D52929D00B6DA2A /* money background image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "money background image.png"; sourceTree = "<group>"; };
+		E62E20471D53FB8100B6DA2A /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		E64B932C1D54646B00157C58 /* CreateAGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAGoalViewController.swift; sourceTree = "<group>"; };
+		E64B932E1D54673D00157C58 /* my goals backgorund.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my goals backgorund.png"; sourceTree = "<group>"; };
+		E64B93321D54694200157C58 /* saving background image goal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "saving background image goal.jpg"; sourceTree = "<group>"; };
+		E64B93341D546B2F00157C58 /* YourGoalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourGoalsViewController.swift; sourceTree = "<group>"; };
+		E64B93361D54700200157C58 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		E64B93381D5575FC00157C58 /* potential wlecome page background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "potential wlecome page background.png"; sourceTree = "<group>"; };
+		E64B933A1D5578C500157C58 /* WelcomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageViewController.swift; sourceTree = "<group>"; };
+		E64B933C1D56692100157C58 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E67D80FF1D4AAA7400BDE13A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E6873D531D46C2B800EC9DF4 /* ExpensesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpensesTableViewController.swift; sourceTree = "<group>"; };
 		E68D671C1D4DDF67006EFD28 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
@@ -134,7 +151,6 @@
 		E6D009561D4BC2D1007B38F1 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		E6D009571D4BC2D1007B38F1 /* password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password.png; sourceTree = "<group>"; };
 		E6D009581D4BC2D1007B38F1 /* username icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "username icon.png"; sourceTree = "<group>"; };
-		E6DF677F1D3FF7C700382663 /* ExpensesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpensesTableViewCell.swift; sourceTree = "<group>"; };
 		E6DF67801D3FF7C700382663 /* MoneyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyTableViewCell.swift; sourceTree = "<group>"; };
 		E6DF67831D3FF7D300382663 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		E6E7A73A1D41E31A00B575EA /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "Pods/../build/Debug-iphoneos/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -280,6 +296,10 @@
 				E6EDED1C1D4A7EA9005F660F /* addAGoalViewController.swift */,
 				E6EDED1E1D4A7ECD005F660F /* SetAGoalViewController.swift */,
 				E62E20411D52622A00B6DA2A /* ChooseAGoalViewController.swift */,
+				E64B932C1D54646B00157C58 /* CreateAGoalViewController.swift */,
+				E64B93341D546B2F00157C58 /* YourGoalsViewController.swift */,
+				E64B933A1D5578C500157C58 /* WelcomePageViewController.swift */,
+				E64B933C1D56692100157C58 /* TabBarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +308,8 @@
 			isa = PBXGroup;
 			children = (
 				E6DF67831D3FF7D300382663 /* Expense.swift */,
+				E64B93361D54700200157C58 /* Goal.swift */,
+				E62E20471D53FB8100B6DA2A /* RealmHelper.swift */,
 			);
 			name = Modules;
 			path = ../Modules;
@@ -305,7 +327,6 @@
 		E6DF677E1D3FF70700382663 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E6DF677F1D3FF7C700382663 /* ExpensesTableViewCell.swift */,
 				E6DF67801D3FF7C700382663 /* MoneyTableViewCell.swift */,
 				E6EDED201D4A7EDB005F660F /* GoalTableViewCell.swift */,
 				E68D671C1D4DDF67006EFD28 /* Shape.swift */,
@@ -316,6 +337,9 @@
 		E6EDED221D4A8274005F660F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E64B93381D5575FC00157C58 /* potential wlecome page background.png */,
+				E64B93321D54694200157C58 /* saving background image goal.jpg */,
+				E64B932E1D54673D00157C58 /* my goals backgorund.png */,
 				E62E20451D52929D00B6DA2A /* money background image.png */,
 				E62E203F1D52575B00B6DA2A /* trnasparent goal icons.png */,
 				E68D67301D500BAB006EFD28 /* cheating xcode patern.png */,
@@ -465,6 +489,7 @@
 				E68D67311D500BAB006EFD28 /* cheating xcode patern.png in Resources */,
 				E61E04341D4D85E2003233AE /* rent image.jpg in Resources */,
 				E68D67361D511EE5006EFD28 /* non transparent goal icon 1 .png in Resources */,
+				E64B932F1D54673D00157C58 /* my goals backgorund.png in Resources */,
 				E62E203E1D52563C00B6DA2A /* another potential background mountains.png in Resources */,
 				E6EDED2A1D4A82B3005F660F /* custom image icon final.png in Resources */,
 				E61E04251D4D69E7003233AE /* bg.png in Resources */,
@@ -481,6 +506,7 @@
 				E68D672D1D5001C8006EFD28 /* img.png in Resources */,
 				E68D67351D511EE5006EFD28 /* non transparent goal icon 3.png in Resources */,
 				E61E04321D4D85E2003233AE /* health insurance.jpg in Resources */,
+				E64B93391D5575FC00157C58 /* potential wlecome page background.png in Resources */,
 				E61E04301D4D85E2003233AE /* groceries image.jpg in Resources */,
 				E61E04311D4D85E2003233AE /* gym image.jpg in Resources */,
 				E6EDED271D4A82B3005F660F /* Payoff debt.png in Resources */,
@@ -488,6 +514,7 @@
 				E62E20441D5264DB00B6DA2A /* photo icon for goals.png in Resources */,
 				E61E04331D4D85E2003233AE /* phone image.jpg in Resources */,
 				E6D009591D4BC2D1007B38F1 /* email.png in Resources */,
+				E64B93331D54694200157C58 /* saving background image goal.jpg in Resources */,
 				E68D67231D4DEE5A006EFD28 /* money background.png in Resources */,
 				E693B5351D3D8B760092EE9B /* Main.storyboard in Resources */,
 			);
@@ -638,19 +665,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				E693B5601D3D94530092EE9B /* AmountOfExpensesViewController.swift in Sources */,
+				E64B932D1D54646B00157C58 /* CreateAGoalViewController.swift in Sources */,
+				E62E20481D53FB8100B6DA2A /* RealmHelper.swift in Sources */,
 				E6EDED1F1D4A7ECD005F660F /* SetAGoalViewController.swift in Sources */,
+				E64B933B1D5578C500157C58 /* WelcomePageViewController.swift in Sources */,
 				E693B56F1D3DA21E0092EE9B /* AmountOfMoney.swift in Sources */,
+				E64B93351D546B2F00157C58 /* YourGoalsViewController.swift in Sources */,
 				E693B56B1D3D958D0092EE9B /* CalenderUnitHelper.swift in Sources */,
 				E62E20421D52622A00B6DA2A /* ChooseAGoalViewController.swift in Sources */,
 				E6EDED211D4A7EDB005F660F /* GoalTableViewCell.swift in Sources */,
 				E6A7B0931D41447300A8F9F9 /* HomeViewController.swift in Sources */,
+				E64B93371D54700200157C58 /* Goal.swift in Sources */,
 				E68D671D1D4DDF67006EFD28 /* Shape.swift in Sources */,
+				E64B933D1D56692100157C58 /* TabBarViewController.swift in Sources */,
 				E6DF67841D3FF7D300382663 /* Expense.swift in Sources */,
 				E693B5301D3D8B760092EE9B /* AppDelegate.swift in Sources */,
 				E6DF67821D3FF7C700382663 /* MoneyTableViewCell.swift in Sources */,
 				E6EDED1D1D4A7EA9005F660F /* addAGoalViewController.swift in Sources */,
 				E6873D541D46C2B900EC9DF4 /* ExpensesTableViewController.swift in Sources */,
-				E6DF67811D3FF7C700382663 /* ExpensesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
